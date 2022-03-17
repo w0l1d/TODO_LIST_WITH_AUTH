@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Manipulation</title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<ul class="nav nav-tabs m-5" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button"
+                role="tab" aria-controls="signup" aria-selected="true">Sign-Up
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab"
+                aria-controls="login" aria-selected="false">Login
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="todo-list-tab" data-bs-toggle="tab" data-bs-target="#todo-list" type="button"
+                role="tab" aria-controls="todo-list" aria-selected="false">ToDo List
+        </button>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+        <form class="d-flex flex-column gap-3 my-md-5 w-75 mx-auto" onsubmit="return false;">
+            <!-- Validation du Nom -->
+            <div class="form-floating" id="validate-nom">
+                <input type="text" class="form-control" required
+                       pattern="^[A-Za-z]+(\s[A-Za-z]+)*$"
+                       id="signup-nom" placeholder="Entrer votre Nom">
+                <label for="signup-nom">Nom</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback ">
+                    doit contenir seulement des caracteres
+                    exemples : ahmed, ahmed mohammed
+                </div>
+            </div>
+            <!-- Validation du Prenom -->
+            <div class="form-floating" id="validate-prenom">
+                <input type="text" class="form-control" required
+                       pattern="^[A-Za-z]+(\s[A-Za-z]+)*$"
+                       id="signup-prenom" placeholder="Entrer votre Prenom">
+                <label for="signup-prenom">Prenom</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    doit contenir seulement des caracteres
+                    exemples : ahmed, ahmed mohammed
+                </div>
+            </div>
+            <!-- Validation du Username -->
+            <div class="form-floating" id="validate-username">
+                <input type="text" class="form-control" required
+                       maxlength="30" minlength="5"
+                       id="signup-username" placeholder="Entrer votre Username">
+                <label for="signup-username">Username</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                   <lu>
+                       <li>doit contenir : lettres majuscule ou minuscules, [_.]</li>
+                       <li>minimum : {5,30} characters</li>
+                   </lu>
+                </div>
+            </div>
+            <!-- Validation du Password -->
+            <div class="form-floating" id="validate-password">
+                <input type="password" class="form-control"
+                       required minlength="8"
+                       id="signup-password" placeholder="Entrer votre Password">
+                <label for="signup-password">Password</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Minimum 8 characters
+                </div>
+            </div>
+
+            <div class="row-cols-1">
+                <button class="btn btn-primary col-md-4 col-sm-12 float-end">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="login"
+         role="tabpanel" aria-labelledby="login-tab">
+        <form class="d-flex flex-column gap-3 my-md-5 w-75 mx-auto">
+            <!-- Validation du Login -->
+            <div class="form-floating" id="validate-username-login">
+                <input type="text" class="form-control"
+                       id="usernameLg" placeholder="Entrer votre Username">
+                <label for="usernameLg">Username</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Looks not good!
+                </div>
+            </div>
+            <!-- Validation du Password -->
+            <div class="form-floating" id="validate-password-Login">
+                <input type="password" class="form-control"
+                       id="passwordLg" placeholder="Entrer votre Password">
+                <label for="passwordLg">Password</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Looks not good!
+                </div>
+            </div>
+
+            <div class="row-cols-1">
+                <button class="btn btn-primary col-md-4 col-sm-12 float-end" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="todo-list" role="tabpanel" aria-labelledby="todo-list-tab">
+        <div class="row p-5">
+            <h1 class="title col-12">TODO List</h1>
+            <div class="toolbar col-12 row row-cols-sm-4 justify-content-around my-4 gap-md-5 gap-5">
+                <button class="col btn btn-info disabled p-3" id="total">
+                    Total : <span></span>
+                </button>
+                <button class="col btn btn-success disabled p-3" id="done">
+                    Done : <span></span>
+                </button>
+                <button class="col btn btn-warning disabled p-3" id="rest">
+                    Rest : <span></span>
+                </button>
+                <button id="selectAll" class="col action btn btn-outline-primary">
+                    Select All
+                </button>
+                <button id="deselectAll" class="col action btn btn-outline-warning">
+                    Deselect All
+                </button>
+                <button id="deleteAll" class="col action btn btn-outline-danger ">
+                    Delete All
+                </button>
+            </div>
+            <ul class="list-tasks col-12 row justify-content-center" id="tasks">
+                <li id="task-add-item" class="input-group mb-3 col-12 col-lg-10">
+                    <input type="text" id="task-txt"
+                           placeholder="Enter your task"
+                           maxlength="100" min="5" required
+                           class="add add-txt form-control" autofocus
+                           aria-label="Task text" aria-describedby="add-btn"/>
+                    <button id="add-btn" class="add add-btn"  type="button">+</button>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="hidden" hidden style="display: none;">
+    <li class="task-item form-check form-switch input-group my-2 mx-3 p-3  col-12 col-lg-10 row justify-content-center" id="task-item-sample">
+        <input type="checkbox" class="task task-box form-check-input col-1" onchange="checked_changed(event)">
+        <label class="task task-lbl form-check-label col-9"></label>
+        <button class="task task-del col-lg-2 col" onclick="deleteTask(event)">X</button>
+    </li>
+</div>
+
+<script src="js/auth.js"></script>
+
+<!-- jsDelivr :: Sortable :: Latest (https://www.jsdelivr.com/package/npm/sortablejs) -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+<script src="js/todo-list.js"></script>
+
+
+
+</body>
+</html>
